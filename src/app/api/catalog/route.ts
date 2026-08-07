@@ -43,13 +43,11 @@ Analyze this clothing item and return ONLY valid JSON with this exact structure:
   "color": "primary color name",
   "colors": ["color1", "color2"],
   "style": "smart casual|business casual|casual|formal|athletic",
-  "formality_level": 1-5,
   "seasons": ["spring","summer","fall","winter"],
   "occasions": ["casual","work","date_night","workout"],
   "ai_description": "2-3 sentence stylist description of the piece and how to wear it"
 }
 
-formality_level: 1=athletic/loungewear, 2=casual, 3=smart casual, 4=business casual, 5=formal.
 Be specific and accurate. Only include seasons and occasions where this piece truly works.`,
             },
           ],
@@ -87,7 +85,6 @@ Be specific and accurate. Only include seasons and occasions where this piece tr
         color: analysis.color,
         colors: analysis.colors,
         style: analysis.style,
-        formality_level: analysis.formality_level,
         seasons: analysis.seasons,
         occasions: analysis.occasions,
         image_url: publicUrlData.publicUrl,

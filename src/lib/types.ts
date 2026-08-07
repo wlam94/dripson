@@ -1,7 +1,6 @@
 export type Category = 'shirt' | 'pants' | 'shoes' | 'accessory' | 'outerwear' | 'other'
 export type Season = 'spring' | 'summer' | 'fall' | 'winter'
 export type Occasion = 'casual' | 'work' | 'date_night' | 'workout'
-export type FormalityLevel = 1 | 2 | 3 | 4 | 5
 
 export interface ClothingItem {
   id: string
@@ -10,7 +9,6 @@ export interface ClothingItem {
   color: string
   colors: string[]
   style: string
-  formality_level: FormalityLevel
   seasons: Season[]
   occasions: Occasion[]
   image_url: string

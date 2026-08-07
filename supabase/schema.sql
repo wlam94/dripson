@@ -38,3 +38,18 @@ create policy "Allow all" on outfit_history for all using (true) with check (tru
 
 -- Storage bucket: run this after creating the bucket named "wardrobe" in Storage UI
 -- insert into storage.buckets (id, name, public) values ('wardrobe', 'wardrobe', true);
+
+-- Style profile table (single-row, id=1 always)
+create table if not exists style_profile (
+  id integer primary key default 1,
+  key_insights text,
+  preferred_formality numeric(3,1),
+  top_colors text[] default '{}',
+  disliked_colors text[] default '{}',
+  preferred_styles text[] default '{}',
+  rated_count integer default 0,
+  updated_at timestamptz default now()
+);
+
+alter table style_profile enable row level security;
+create policy "Allow all" on style_profile for all using (true) with check (true);
