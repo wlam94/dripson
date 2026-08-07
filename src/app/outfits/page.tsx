@@ -296,9 +296,21 @@ export default function OutfitsPage() {
             </div>
             <div>
               <p style={{ fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--c-fg-muted)", fontWeight: 700, marginBottom: "10px" }}>Season</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+              <div style={{ display: "flex", backgroundColor: "var(--c-surface-2)", borderRadius: "var(--r-md)", padding: "3px", gap: "2px" }}>
                 {SEASONS.map(({ value, label }) => (
-                  <button key={value} onClick={() => setSeason(value)} className={`chip${season === value ? " active" : ""}`}>{label}</button>
+                  <button
+                    key={value}
+                    onClick={() => setSeason(value)}
+                    style={{
+                      flex: 1, padding: "7px 0", fontSize: "0.72rem",
+                      fontWeight: season === value ? 600 : 500,
+                      fontFamily: "inherit", textTransform: "capitalize", cursor: "pointer",
+                      border: "none", borderRadius: "10px", transition: "all 180ms ease",
+                      backgroundColor: season === value ? "var(--c-surface)" : "transparent",
+                      color: season === value ? "var(--c-fg)" : "var(--c-fg-muted)",
+                      boxShadow: season === value ? "0 1px 4px rgba(0,0,0,0.1)" : "none",
+                    }}
+                  >{label}</button>
                 ))}
               </div>
             </div>

@@ -147,18 +147,6 @@ function DotsIcon() {
   );
 }
 
-function CalendarIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-      <line x1="16" y1="2" x2="16" y2="6" />
-      <line x1="8"  y1="2" x2="8"  y2="6" />
-      <line x1="3"  y1="10" x2="21" y2="10" />
-    </svg>
-  );
-}
-
 function TrashIcon() {
   return (
     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
@@ -184,14 +172,13 @@ interface OutfitCardProps {
   onSelectVariant: (idx: number) => void;
   onToggleMenu: () => void;
   onRate: (id: string, rating: number) => void;
-  onWearToday: (id: string) => void;
   onDelete: (id: string) => void;
   labelFn: (o: string) => string;
 }
 
 function OutfitCard({
   group, faded = false, selectedIdx, isExpanded, isMenuOpen, currentRating, isAnyLiked,
-  onToggleExpand, onSelectVariant, onToggleMenu, onRate, onWearToday, onDelete, labelFn,
+  onToggleExpand, onSelectVariant, onToggleMenu, onRate, onDelete, labelFn,
 }: OutfitCardProps) {
   const cardInnerRef       = useRef<HTMLDivElement>(null);
   const touchStartX        = useRef(0);
@@ -354,15 +341,6 @@ function OutfitCard({
               )}
             </div>
           </div>
-
-          {/* Wear Today direct button */}
-          <button
-            title="Wear Today"
-            onClick={e => { e.stopPropagation(); onWearToday(variant.id); }}
-            style={{ flexShrink: 0, background: "none", border: "none", cursor: "pointer", padding: "6px", color: "var(--c-fg-muted)", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center" }}
-          >
-            <CalendarIcon />
-          </button>
 
           {/* Chevron */}
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--c-fg-muted)" strokeWidth="2.5"
@@ -586,16 +564,6 @@ export default function HistoryPage() {
     setTimeout(() => setToast(null), 2500);
   }
 
-  async function wearToday(variantId: string) {
-    const today = new Date().toISOString();
-    setEntries(prev => prev.map(e => e.id === variantId ? { ...e, worn_date: today } : e));
-    showToast("Marked as worn today ✓");
-    await fetch(`/api/outfits/history/${variantId}`, {
-      method: "PATCH", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ worn_date: today }),
-    });
-  }
-
   // ── Derived data ──
   const visibleEntries = entries.filter(e => !deletedIds.has(e.id));
   const sorted = [...visibleEntries].sort((a, b) => new Date(b.worn_date).getTime() - new Date(a.worn_date).getTime());
@@ -657,9 +625,8 @@ export default function HistoryPage() {
       }),
       onSelectVariant: (idx: number) => setVariantMap(prev => new Map([...prev, [group.groupId, idx]])),
       onToggleMenu:    () => setOpenMenu(openMenu === group.groupId ? null : group.groupId),
-      onRate:     rate,
-      onWearToday: wearToday,
-      onDelete:    deleteVariant,
+      onRate:   rate,
+      onDelete: deleteVariant,
       labelFn:     label,
     };
   }
