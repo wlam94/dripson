@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getSupabase } from "@/lib/supabase";
@@ -49,7 +50,7 @@ function BoltIcon() {
   );
 }
 
-const OCCASIONS = [
+const OCCASIONS: { value: Occasion; label: string; desc: string; Icon: () => React.JSX.Element }[] = [
   { value: "casual",     label: "Casual",     desc: "Everyday comfort, NYC-ready", Icon: SunIcon       },
   { value: "work",       label: "Work",        desc: "Sharp enough for the office", Icon: BriefcaseIcon },
   { value: "date_night", label: "Date Night",  desc: "Elevated, intentional",       Icon: StarIcon      },
