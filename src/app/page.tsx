@@ -114,10 +114,10 @@ export default function Dashboard() {
     <div className="page-content" style={{ maxWidth: "600px" }}>
 
       {/* ── Header ── */}
-      <div className="anim-fade-up" style={{ marginBottom: "2.25rem" }}>
+      <div className="anim-fade-up" style={{ marginBottom: "1.25rem" }}>
 
         {/* Weather + season pills */}
-        <div style={{ display: "flex", gap: "8px", marginBottom: "1.25rem", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: "6px", marginBottom: "0.75rem", flexWrap: "wrap" }}>
           {weather && <span className="meta-pill">{weather} · NYC</span>}
           <span className="meta-pill" style={{ textTransform: "capitalize" }}>{season}</span>
         </div>
@@ -125,7 +125,7 @@ export default function Dashboard() {
         {/* Heading */}
         <h1 style={{
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(2rem, 8vw, 2.75rem)",
+          fontSize: "clamp(1.75rem, 7vw, 2.5rem)",
           fontWeight: 700,
           letterSpacing: "-0.03em",
           lineHeight: 1.05,
@@ -134,15 +134,15 @@ export default function Dashboard() {
           What&apos;s the <em style={{ fontStyle: "italic", fontWeight: 400, color: "var(--c-fg-soft)" }}>occasion?</em>
         </h1>
 
-        {/* Style insight as editorial pull quote */}
+        {/* Style insight */}
         {styleInsight && (
-          <div className="gold-bar" style={{ marginTop: "1.25rem" }}>
+          <div className="gold-bar" style={{ marginTop: "0.75rem" }}>
             <p style={{
               fontFamily: "var(--font-display)",
               fontStyle: "italic",
-              fontSize: "0.9375rem",
+              fontSize: "0.8125rem",
               color: "var(--c-fg-soft)",
-              lineHeight: 1.65,
+              lineHeight: 1.5,
             }}>
               {styleInsight}
             </p>
@@ -150,22 +150,41 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* ── Occasion cards ── */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "2rem" }}>
+      {/* ── Occasion cards — 2×2 grid ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "1rem" }}>
         {OCCASIONS.map(({ value, label, desc, Icon }, i) => (
           <button
             key={value}
             onClick={() => setActiveOccasion(value)}
-            className="card occasion-card anim-fade-up"
-            style={{ animationDelay: `${80 + i * 75}ms`, width: "100%", textAlign: "left", background: "var(--c-surface)", outline: "none", cursor: "pointer" }}
+            className="card anim-fade-up"
+            style={{
+              animationDelay: `${80 + i * 75}ms`,
+              textAlign: "left",
+              background: "var(--c-surface)",
+              outline: "none",
+              cursor: "pointer",
+              padding: "1rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              borderRadius: "var(--r-lg)",
+              transition: "box-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease)",
+            }}
           >
-            <div className="occasion-icon">
+            <div style={{
+              width: "38px", height: "38px", flexShrink: 0,
+              borderRadius: "var(--r-md)",
+              backgroundColor: "var(--c-surface-2)",
+              border: "1px solid var(--c-border)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              color: "var(--c-fg)",
+            }}>
               <Icon />
             </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <div>
               <p style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "1.25rem",
+                fontSize: "1.1rem",
                 fontWeight: 700,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.1,
@@ -174,13 +193,8 @@ export default function Dashboard() {
               }}>
                 {label}
               </p>
-              <p style={{ fontSize: "0.8125rem", color: "var(--c-fg-muted)", lineHeight: 1.4 }}>{desc}</p>
+              <p style={{ fontSize: "0.72rem", color: "var(--c-fg-muted)", lineHeight: 1.3 }}>{desc}</p>
             </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-              stroke="var(--c-fg-muted)" strokeWidth="2.5"
-              strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
           </button>
         ))}
       </div>
@@ -196,7 +210,7 @@ export default function Dashboard() {
       )}
 
       {/* ── Stats cards ── */}
-      <div className="anim-fade-up d-4" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "1.25rem" }}>
+      <div className="anim-fade-up d-4" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "0.75rem" }}>
         <Link href="/wardrobe" className="card stat-card" style={{ textDecoration: "none" }}>
           {statsLoading
             ? <div className="shimmer" style={{ height: "28px", width: "48px", borderRadius: "4px", marginBottom: "6px" }} />
