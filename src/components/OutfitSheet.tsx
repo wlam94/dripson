@@ -255,15 +255,35 @@ export default function OutfitSheet({ occasion, season, weather, onClose }: Prop
             </div>
           </div>
 
-          {/* Season picker */}
-          <div style={{ display: "flex", gap: "6px", marginBottom: "14px" }}>
+          {/* Season picker — segmented control */}
+          <div style={{
+            display: "flex",
+            backgroundColor: "var(--c-surface-2)",
+            borderRadius: "var(--r-md)",
+            padding: "3px",
+            marginBottom: "14px",
+            gap: "2px",
+          }}>
             {SEASONS.map(s => (
               <button
                 key={s}
                 onClick={() => changeSeason(s)}
                 disabled={loading}
-                className={`chip${currentSeason === s ? " active" : ""}`}
-                style={{ textTransform: "capitalize", minHeight: "34px", padding: "0 14px", fontSize: "0.75rem" }}
+                style={{
+                  flex: 1,
+                  padding: "7px 0",
+                  fontSize: "0.72rem",
+                  fontWeight: currentSeason === s ? 600 : 500,
+                  fontFamily: "inherit",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  border: "none",
+                  borderRadius: "10px",
+                  transition: "all 180ms ease",
+                  backgroundColor: currentSeason === s ? "var(--c-surface)" : "transparent",
+                  color: currentSeason === s ? "var(--c-fg)" : "var(--c-fg-muted)",
+                  boxShadow: currentSeason === s ? "0 1px 4px rgba(0,0,0,0.1)" : "none",
+                }}
               >
                 {s}
               </button>
