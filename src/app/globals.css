@@ -119,6 +119,12 @@ button { cursor: pointer; font-family: inherit; }
   border-radius: inherit;
 }
 
+/* ── Safe area: push main content clear of notch + home indicator ── */
+#main-content {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+}
+
 /* ── Page content wrapper ── */
 .page-content {
   width: 100%;
